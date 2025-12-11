@@ -101,6 +101,6 @@ MIT License - See LICENSE file for details
 
 ## Author
 
-**Ritvik Verma** (@ritvikvr)
+**Ritvik** (@ritvikvr)
 - GitHub: [https://github.com/ritvikvr](https://github.com/ritvikvr)
 - Focus: Full-stack development, Django applications, social platforms
