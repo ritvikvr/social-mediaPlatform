@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ username }}'s Profile</h2>
+{% if posts %}
+    {% for post in posts %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <p class="card-text">{{ post.content }}</p>
+            <small>{{ post.created_at|date:"M d, Y H:i" }}</small>
+            <div class="mt-2">
+                <a href="{% url 'like_post' post.pk %}" class="btn btn-sm btn-outline-primary">
+                    Like ({{ post.likes.count }})
+                </a>
+                <a href="{% url 'comment_create' post.pk %}" class="btn btn-sm btn-outline-secondary">Comment</a>
+                {% if user == post.user %}
+                    <a href="{% url 'post_delete' post.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                {% endif %}
+            </div>
+            <div class="mt-2">
+                <h6>Comments:</h6>
+                {% for comment in post.comments.all %}
+                <p><small>{{ comment.user.username }}: {{ comment.content }} ({{ comment.created_at|date:"M d, Y" }})</small></p>
+                {% if user == comment.user %}
+                    <a href="{% url 'comment_delete' comment.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <p>No posts yet.</p>
+{% endif %}
+<a href="{% url 'feed' %}" class="btn btn-secondary">Back to Feed</a>
+{% endblock %}
